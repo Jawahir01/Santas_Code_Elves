@@ -42,6 +42,7 @@ function previewCards() {
 
 function restartGame() {
     lives = 3;
+    gameOver = false;
     updateLives();
 
     cards.forEach(card => {
@@ -53,6 +54,7 @@ function restartGame() {
     shuffleCards();
     previewCards();
 }
+
 
 function startIdleTimer() {
     if (lockBoard) return;
@@ -78,10 +80,10 @@ function startIdleTimer() {
             updateLives();
 
             if (lives <= 0) {
-                timerDisplay.textContent = "Game Over";
-                setTimeout(restartGame, 1500);
+                endGame("You Lose");
                 return;
             }
+
 
             setTimeout(startIdleTimer, 1000);
 
@@ -111,22 +113,25 @@ function startMatchTimer() {
 }
 
 function flipCard() {
-    if (lockBoard) return;
+    if (lockBoard || gameOver) return;
     if (this === firstCard) return;
     if (this.classList.contains("matched")) return;
 
     this.classList.add("flipped");
     this.textContent = this.dataset.card;
+
     if (!firstCard) {
         clearInterval(idleTimer);
         firstCard = this;
         startMatchTimer();
         return;
     }
+
     secondCard = this;
     clearInterval(matchTimer);
     checkMatch();
 }
+
 
 function checkMatch() {
     const isMatch = firstCard.dataset.card === secondCard.dataset.card;
@@ -159,10 +164,10 @@ function unflipCards() {
         updateLives();
 
         if (lives <= 0) {
-            timerDisplay.textContent = "Game Over";
-            setTimeout(restartGame, 1500);
+            endGame("You Lose");
             return;
         }
+
 
         resetBoard();
         startIdleTimer();
@@ -173,13 +178,10 @@ function checkWin() {
     const matchedCards = document.querySelectorAll(".memory-card.matched");
 
     if (matchedCards.length === cards.length) {
-        clearInterval(idleTimer);
-        clearInterval(matchTimer);
-        lockBoard = true;
-
-        timerDisplay.textContent = "🎉 You Win!";
+        endGame("🎉 You Win!");
     }
 }
+
 
 function endGame(message) {
     clearInterval(idleTimer);
@@ -192,10 +194,15 @@ function endGame(message) {
 
 function resetBoard() {
     [firstCard, secondCard] = [null, null];
-    lockBoard = false;
+
+    if (!gameOver) {
+        lockBoard = false;
+    }
+
     clearInterval(idleTimer);
     clearInterval(matchTimer);
 }
+
 cards.forEach(card => card.addEventListener("click", flipCard));
 restartBtn.addEventListener("click", restartGame);
 
