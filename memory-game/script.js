@@ -44,3 +44,20 @@ function restartGame() {
     shuffleCards();
     previewCards();
 }
+
+function startIdleTimer() {
+    clearInterval(idleTimer);
+
+    let timeLeft = 10;
+    timerDisplay.textContent = timeLeft;
+
+    idleTimer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+
+        if (timeLeft === 0) {
+            clearInterval(idleTimer);
+            startIdleTimer();
+        }
+    }, 1000);
+}
