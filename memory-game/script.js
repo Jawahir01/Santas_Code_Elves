@@ -146,3 +146,7 @@ function resetBoard() {
 }
 cards.forEach(card => card.addEventListener("click", flipCard));
 restartBtn.addEventListener("click", restartGame);
+
+shuffleCards();
+previewCards();
+startIdleTimer();
