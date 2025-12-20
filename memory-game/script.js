@@ -10,6 +10,8 @@ let lives = 3;
 let idleTimer = null;
 let matchTimer = null;
 let gameOver = false;
+let previewTimer = null;
+
 
 function updateLives() {
     livesDisplay.textContent = "❤️".repeat(lives);
@@ -23,22 +25,27 @@ function shuffleCards() {
 }
 
 function previewCards() {
+    clearTimeout(previewTimer);
     lockBoard = true;
+
     timerDisplay.textContent = "Memorise the cards...";
 
     cards.forEach(card => {
         card.classList.add("flipped");
         card.textContent = card.dataset.card;
     });
-    setTimeout(() => {
+
+    previewTimer = setTimeout(() => {
         cards.forEach(card => {
             card.classList.remove("flipped");
             card.textContent = "";
         });
+
         lockBoard = false;
         startIdleTimer();
     }, 8000);
 }
+
 
 function restartGame() {
     lives = 3;
