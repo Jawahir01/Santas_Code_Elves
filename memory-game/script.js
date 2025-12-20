@@ -136,3 +136,13 @@ function unflipCards() {
         resetBoard();
     }, 1000);
 }
+
+function resetBoard() {
+    [firstCard, secondCard] = [null, null];
+    lockBoard = false;
+    clearInterval(idleTimer);
+    clearInterval(matchTimer);
+    startIdleTimer();
+}
+cards.forEach(card => card.addEventListener("click", flipCard));
+restartBtn.addEventListener("click", restartGame);
