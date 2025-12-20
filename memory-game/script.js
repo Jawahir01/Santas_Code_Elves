@@ -1,6 +1,7 @@
 const cards = document.querySelectorAll(".memory-card");
 const restartBtn = document.getElementById("restart");
 const timerDisplay = document.getElementById("timer");
+const livesDisplay = document.getElementById("lives");
 
 let firstCard = null;
 let secondCard = null;
@@ -8,6 +9,10 @@ let lockBoard = false;
 let lives = 3;
 let idleTimer = null;
 let matchTimer = null;
+
+function updateLives() {
+    livesDisplay.textContent = "❤️".repeat(lives);
+}
 
 function shuffleCards() {
     cards.forEach(card => {
@@ -36,7 +41,7 @@ function previewCards() {
 
 function restartGame() {
     lives = 3;
-    console.log("Lives:", lives);
+    updateLives();
 
     cards.forEach(card => {
         card.classList.remove("flipped", "matched");
@@ -67,7 +72,18 @@ function startIdleTimer() {
 
         if (timeLeft === 0) {
             clearInterval(idleTimer);
-            startIdleTimer();
+
+            lives--;
+            updateLives();
+
+            if (lives <= 0) {
+                timerDisplay.textContent = "Game Over";
+                setTimeout(restartGame, 1500);
+                return;
+            }
+
+            setTimeout(startIdleTimer, 1000);
+
         }
     }, 1000);
 }
@@ -132,18 +148,19 @@ function unflipCards() {
         secondCard.textContent = "";
 
         lives--;
-        timerDisplay.textContent = lives === 0
-            ? "Out of lives!"
-            : `Lives: ${lives}`;
+        updateLives();
 
-        if (lives === 0) {
-            restartGame();
+        if (lives <= 0) {
+            timerDisplay.textContent = "Game Over";
+            setTimeout(restartGame, 1500);
             return;
         }
 
         resetBoard();
+        startIdleTimer();
     }, 1000);
 }
+
 
 function resetBoard() {
     [firstCard, secondCard] = [null, null];
@@ -156,3 +173,4 @@ restartBtn.addEventListener("click", restartGame);
 
 shuffleCards();
 previewCards();
+updateLives();

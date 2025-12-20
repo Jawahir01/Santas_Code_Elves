@@ -29,3 +29,18 @@ body {
     background: green;
     cursor: default;
 }
+
+#hud {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+#timer {
+    font-size: 2rem;
+}
+
+#lives {
+    font-size: 1.5rem;
+}
