@@ -26,11 +26,7 @@ maze-container {
     overflow: hidden; /* Prevents scrollbars from appearing */
 }
 
-#timer {
-    color: #000000;
-}
-
-.cell {
+.cell { /* Styles for each cell in the maze */
     position: relative;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.9);
@@ -76,5 +72,113 @@ width: 4px;
 
 #player {
     position: absolute;
-    background: (circle, green)
+    background: radial-gradient(circle, green); /* Green circle for player */
+    transition: 0.2s ease; /* Smooth movement */
+    border-radius: 50%; /* Makes the player a circle */
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.5); /* Adds a shadow for depth */
+}
+
+#controls {
+    margin: 10px;
+    display: grid;
+    grid-template-areas: 
+    ". up ."
+    "left . right"
+    ". down .";
+    gap: 10px;
+    justify-content: center;
+}
+
+.control-btn { /* Styles for control buttons */
+    width: 80px;
+    height: 60px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px #388E3C;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.control-btn:active { /* Button press effect */
+    transform: scale(0.95);
+}
+
+#up {
+    grid-area: up
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
+}
+
+#down {
+    grid-area: down;
+}
+
+#message { /* Styles for messages */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color: #FFD700; /* Gold color for messages */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: black;  /*Will be changed later*/
+    padding: 30px 40px;
+    border-radius: 20px;
+    display: none; /* Hidden by default */
+    animation: messageAppear 0.5s forwards;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    border: 2ps solid #4CAF50
+}
+
+#try-again {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px #388E3C;
+    transition: background-color 0.3s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+}
+
+try-again:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(72, 219, 112, 0.6);
+}
+
+#timer {
+    color:#000000;
+    font-size: 24px;
+    margin: 20px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+}
+
+.exit {
+    background-image: url(/Santa-s_Code_Elves/assets/images/christmas-present.png);/* Image for exit cell. Obtained from Pngtree*/
+}
+
+#maze {
+    display: grid;
+    background-color: white;
+}
+
+.hover-effect {
+    background: linear-gradient(45deg, #4CAF50, #45a049) !important;
+    transform: scale(1.15) !important;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8) !important;
 }
