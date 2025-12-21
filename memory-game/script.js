@@ -9,6 +9,9 @@ let lockBoard = false;
 let lives = 3;
 let idleTimer = null;
 let matchTimer = null;
+let gameOver = false;
+let previewTimer = null;
+
 
 function updateLives() {
     livesDisplay.textContent = "❤️".repeat(lives);
@@ -22,25 +25,31 @@ function shuffleCards() {
 }
 
 function previewCards() {
+    clearTimeout(previewTimer);
     lockBoard = true;
+
     timerDisplay.textContent = "Memorise the cards...";
 
     cards.forEach(card => {
         card.classList.add("flipped");
         card.textContent = card.dataset.card;
     });
-    setTimeout(() => {
+
+    previewTimer = setTimeout(() => {
         cards.forEach(card => {
             card.classList.remove("flipped");
             card.textContent = "";
         });
+
         lockBoard = false;
         startIdleTimer();
     }, 8000);
 }
 
+
 function restartGame() {
     lives = 3;
+    gameOver = false;
     updateLives();
 
     cards.forEach(card => {
@@ -52,6 +61,7 @@ function restartGame() {
     shuffleCards();
     previewCards();
 }
+
 
 function startIdleTimer() {
     if (lockBoard) return;
@@ -77,10 +87,10 @@ function startIdleTimer() {
             updateLives();
 
             if (lives <= 0) {
-                timerDisplay.textContent = "Game Over";
-                setTimeout(restartGame, 1500);
+                endGame("You Lose");
                 return;
             }
+
 
             setTimeout(startIdleTimer, 1000);
 
@@ -110,22 +120,25 @@ function startMatchTimer() {
 }
 
 function flipCard() {
-    if (lockBoard) return;
+    if (lockBoard || gameOver) return;
     if (this === firstCard) return;
     if (this.classList.contains("matched")) return;
 
     this.classList.add("flipped");
     this.textContent = this.dataset.card;
+
     if (!firstCard) {
         clearInterval(idleTimer);
         firstCard = this;
         startMatchTimer();
         return;
     }
+
     secondCard = this;
     clearInterval(matchTimer);
     checkMatch();
 }
+
 
 function checkMatch() {
     const isMatch = firstCard.dataset.card === secondCard.dataset.card;
@@ -135,8 +148,15 @@ function checkMatch() {
 function disableCards() {
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
+
     resetBoard();
+
+    checkWin();
+    if (!lockBoard) {
+        startIdleTimer();
+    }
 }
+
 
 function unflipCards() {
     lockBoard = true;
@@ -151,23 +171,45 @@ function unflipCards() {
         updateLives();
 
         if (lives <= 0) {
-            timerDisplay.textContent = "Game Over";
-            setTimeout(restartGame, 1500);
+            endGame("You Lose");
             return;
         }
+
 
         resetBoard();
         startIdleTimer();
     }, 1000);
 }
 
+function checkWin() {
+    const matchedCards = document.querySelectorAll(".memory-card.matched");
+
+    if (matchedCards.length === cards.length) {
+        endGame("🎉 You Win!");
+    }
+}
+
+
+function endGame(message) {
+    clearInterval(idleTimer);
+    clearInterval(matchTimer);
+    lockBoard = true;
+    gameOver = true;
+
+    timerDisplay.textContent = message;
+}
 
 function resetBoard() {
     [firstCard, secondCard] = [null, null];
-    lockBoard = false;
+
+    if (!gameOver) {
+        lockBoard = false;
+    }
+
     clearInterval(idleTimer);
     clearInterval(matchTimer);
 }
+
 cards.forEach(card => card.addEventListener("click", flipCard));
 restartBtn.addEventListener("click", restartGame);
 
