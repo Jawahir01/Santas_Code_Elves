@@ -113,11 +113,11 @@ function startMemoryGame2() {
     // Reset UI stats
     document.getElementById("memory2Matches").textContent = "0";
     document.getElementById("memory2Lives").textContent = "❤️";
-    document.getElementById("memory2Time").textContent = "60";
     document.getElementById("memory2Total").textContent = "6";
 
-    // Reset overlay
-    hideOverlay2();
+    // Reset play area text if previously lost
+    const playArea = document.querySelector(".memory2-playarea");
+    playArea.innerHTML = `<div class="memory2-grid" id="memory2Grid"></div>`;
 
     // Disable Start button while running
     const startBtn = document.getElementById("memory2StartBtn");
@@ -126,96 +126,98 @@ function startMemoryGame2() {
 
     // Rebuild a fresh shuffled board every start
     buildMemoryBoard2();
-    revealAllCards2(true);
-    setBoardEnabled2(false);
 
-    let timeLeft = 60;
     let matches = 0;
     let firstCard = null;
     let secondCard = null;
     let lock = true;
 
-    // After 8 seconds, hide and allow play
-    memory2RevealTimeout = setTimeout(() => {
-        revealAllCards2(false);
-        setBoardEnabled2(true);
-        lock = false;
-    }, 8000);
+    // ---- TIMER SETUP ----
+    let reviewTime = 10;   // 10s memorise
+    let playTime = 20;     // 20s play
+    let phase = "review";  // review | play
 
-    // Timer starts immediately (keeps it fair — they can still memorise while it counts)
+    document.getElementById("memory2Time").textContent = reviewTime;
+
+    // Reveal all cards during review
+    revealAllCards2(true);
+    setBoardEnabled2(false);
+
     memory2Interval = setInterval(() => {
-        timeLeft--;
-        const t = document.getElementById("memory2Time");
-        if (t) t.textContent = String(timeLeft);
+        if (phase === "review") {
+            reviewTime--;
+            document.getElementById("memory2Time").textContent = reviewTime;
 
-        if (timeLeft <= 0) {
-            clearInterval(memory2Interval);
-            memory2Interval = null;
-            setBoardEnabled2(false);
-            loseMemoryGame2("😞 Time's Up! Try Again!");
+            if (reviewTime <= 0) {
+                phase = "play";
+                revealAllCards2(false);
+                setBoardEnabled2(true);
+                lock = false;
+                document.getElementById("memory2Time").textContent = playTime;
+            }
+        } else {
+            playTime--;
+            document.getElementById("memory2Time").textContent = playTime;
+
+            if (playTime <= 0) {
+                clearInterval(memory2Interval);
+                memory2Interval = null;
+                setBoardEnabled2(false);
+                loseMemoryGame2("😞 Time's Up! Try Again!");
+            }
         }
     }, 1000);
 
-    // Click logic
+    // ---- CLICK LOGIC ----
     const grid = document.getElementById("memory2Grid");
-    grid.addEventListener(
-        "click",
-        (e) => {
-            const card = e.target.closest(".memory2-card");
-            if (!card) return;
+    grid.onclick = (e) => {
+        const card = e.target.closest(".memory2-card");
+        if (!card) return;
 
-            if (lock) return;
-            if (card.dataset.state === "matched") return;
-            if (card === firstCard) return;
+        if (lock) return;
+        if (card.dataset.state === "matched") return;
+        if (card === firstCard) return;
 
-            flipCardUp2(card);
+        flipCardUp2(card);
 
-            if (!firstCard) {
-                firstCard = card;
-                return;
+        if (!firstCard) {
+            firstCard = card;
+            return;
+        }
+
+        secondCard = card;
+        lock = true;
+
+        if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+            firstCard.dataset.state = "matched";
+            secondCard.dataset.state = "matched";
+            firstCard.classList.add("matched");
+            secondCard.classList.add("matched");
+
+            matches++;
+            document.getElementById("memory2Matches").textContent = matches;
+
+            firstCard = null;
+            secondCard = null;
+            lock = false;
+
+            if (matches === 6) {
+                clearInterval(memory2Interval);
+                memory2Interval = null;
+                winMemoryGame2();
             }
-
-            secondCard = card;
-            lock = true;
-
-            const a = firstCard.dataset.symbol;
-            const b = secondCard.dataset.symbol;
-
-            if (a === b) {
-                // Match
-                firstCard.dataset.state = "matched";
-                secondCard.dataset.state = "matched";
-                firstCard.classList.add("matched");
-                secondCard.classList.add("matched");
-
-                matches++;
-                document.getElementById("memory2Matches").textContent = String(matches);
-
-                // reset turn
-                firstCard = null;
-                secondCard = null;
-                lock = false;
-
-                // Win?
-                if (matches === 6) {
-                    clearInterval(memory2Interval);
-                    memory2Interval = null;
-                    setBoardEnabled2(false);
-                    winMemoryGame2();
-                }
-            } else {
-                // Wrong pair = lose (ONLY 1 LIFE)
-                setTimeout(() => {
-                    clearInterval(memory2Interval);
-                    memory2Interval = null;
-                    setBoardEnabled2(false);
-                    loseMemoryGame2("💥 Wrong Match! Start Again!");
-                }, 600);
-            }
-        },
-        { once: true }
-    );
+        } else {
+            // ONE LIFE ONLY → instant lose
+            setTimeout(() => {
+                clearInterval(memory2Interval);
+                memory2Interval = null;
+                setBoardEnabled2(false);
+                loseMemoryGame2("😞 Time's Up! Try Again!");
+            }, 600);
+        }
+    };
 }
+
 
 function setBoardEnabled2(enabled) {
     const cards = document.querySelectorAll(".memory2-card");
@@ -264,23 +266,21 @@ function hideOverlay2() {
     if (village) village.style.display = "none";
 }
 
-function loseMemoryGame2(message) {
-    // enable Start Again, hide Back to Village
-    showOverlay2(message, "You have 1 life only — try memorising better this time!");
+function loseMemoryGame2() {
+    cleanupMemoryGame2();
+    setBoardEnabled2(false);
 
-    const retryBtn = document.getElementById("memory2RetryBtn");
-    const villageBtn = document.getElementById("memory2VillageBtn");
-    retryBtn.style.display = "inline-flex";
-    villageBtn.style.display = "none";
+    const playArea = document.querySelector(".memory2-playarea");
+    playArea.innerHTML = `
+        <div class="memory2-lose-message">
+            😞 Time's Up! Try Again!
+        </div>
+    `;
 
-    // Re-enable start button (optional) but you wanted Start Again specifically
+    // Re-enable Start Match button
     const startBtn = document.getElementById("memory2StartBtn");
     startBtn.disabled = false;
     startBtn.classList.remove("disabled");
-
-    retryBtn.onclick = () => {
-        startMemoryGame2();
-    };
 }
 
 function winMemoryGame2() {
