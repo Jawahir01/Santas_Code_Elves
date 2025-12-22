@@ -1,4 +1,4 @@
-body {
+#body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,12 +7,12 @@ body {
     margin: 0;
     padding: 10px;
     overflow: hidden;
-    background-image: url(../assets/images/snow-background.jpg);
+    background-image: url(../images/snow-background.jpg);
     background-size: 120% 120%; /* Adjusted to better fit the screen */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-}
+} 
 
 #maze-container {
     position: relative; /*allows for absolute positioning of child elements*/
@@ -189,7 +189,7 @@ width: 4px;
 }
 
 .exit {
-    background-image: url('../Santa-s_Code_Elves/assets/images/christmas-present.png');
+    background-image: url(../images/christmas-present.png); /* Image for exit cell. Obtained from Pngtree*/
     background-size: contain; /* Scales image to fit while keeping aspect ratio */
     background-position: center;
     background-repeat: no-repeat;
