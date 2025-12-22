@@ -160,7 +160,7 @@ function updatePlayerPosition() {
         showMessage("Congratulations! You've helped Santa!");
     }
 }
-function movePlayer(direction) {
+function movePlayer(direction) { //Player movement logic
     if (!gameActive) return;
     const walls = maze[player.y][player.x].walls;
     switch (direction) {
@@ -187,7 +187,7 @@ function showMessage(text) {
     document.getElementById("message").style.display = "block";
 }
 
-function initGame() { //Game initialization
+function initMazeGame() { //Game initialization
 gameActive = true;
 timeLeft = 60;
 document.getElementById("timer").textContent = `Timer: ${timeLeft}s`;
@@ -197,7 +197,7 @@ generateMaze();
 renderMaze();
 
 
-timer = setInterval(() => {
+timer = setInterval(() => { //timer of 60s
     timeLeft--;
     document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
     if (timeLeft <= 0) {
@@ -241,4 +241,4 @@ document.addEventListener("keyUp", (e) => { //Remove hover effect on key release
 }
 })
 
-initGame();//Start the game on load
+initMazeGame();//Start the game on load

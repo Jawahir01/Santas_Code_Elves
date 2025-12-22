@@ -149,7 +149,7 @@ width: 4px;
     color: #FFD700; /* Gold color for messages */
     transform: translate(-50%, -50%);
     text-align: center;
-    background: black;  /*Will be changed later*/
+    background: black;  
     padding: 30px 40px;
     border-radius: 20px;
     display: none; /* Hidden by default */
