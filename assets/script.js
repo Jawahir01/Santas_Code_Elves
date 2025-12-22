@@ -140,17 +140,26 @@ function renderMaze() { //Rendering the maze
 }
 
 function updatePlayerPosition() {
-    const playerElem = document.getElementById('player'); //Player movement logic
+    const playerElem = document.getElementById('player');
+    const mazeElement = document.getElementById('maze');
+    
+    // Get maze position relative to container
+    const mazeRect = mazeElement.getBoundingClientRect();
+    const containerRect = mazeElement.parentElement.getBoundingClientRect();
+    const mazeOffsetLeft = mazeRect.left - containerRect.left;
+    const mazeOffsetTop = mazeRect.top - containerRect.top;
+    
     playerElem.style.width = CELL_SIZE * 0.6 + "px";
     playerElem.style.height = CELL_SIZE * 0.6 + "px";
-    playerElem.style.left = player.x * CELL_SIZE + CELL_SIZE * 0.2 + "px";
-    playerElem.style.top = player.y * CELL_SIZE + CELL_SIZE * 0.2 + "px";
-
+    
+    // Add maze offset to position
+    playerElem.style.left = (mazeOffsetLeft + player.x * CELL_SIZE + CELL_SIZE * 0.2) + "px";
+    playerElem.style.top = (mazeOffsetTop + player.y * CELL_SIZE + CELL_SIZE * 0.2) + "px";
+    
     if (player.x === exitPos.x && player.y === exitPos.y) {
         showMessage("Congratulations! You've helped Santa!");
     }
 }
-
 function movePlayer(direction) {
     if (!gameActive) return;
     const walls = maze[player.y][player.x].walls;
