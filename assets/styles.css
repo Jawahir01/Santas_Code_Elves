@@ -2,12 +2,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1a1a1a, #2a2a2a;
     font-family: 'Arial', sans-serif;
     min-height: 100vh;
     margin: 0;
-    color: #f0f0f0;
-    overflow:hidden; /* Prevents scrollbars from appearing */
+    overflow: hidden;
+    background-image: url(../assets/images/snow-background.jpg);
+    background-size: 120% 120%; /* Adjusted to better fit the screen */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 #maze-container {
@@ -16,13 +19,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
     max-width: 800px;
     margin: 20px;
-    background-color: #2a2a2a;
-    padding: 20px;
+    background-color: transparent;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(34, 34, 34, 0.5);
     overflow: hidden; /* Prevents scrollbars from appearing */
 }
 
@@ -72,10 +73,16 @@ width: 4px;
 
 #player {
     position: absolute;
-    background: radial-gradient(circle, green); /* Green circle for player */
-    transition: 0.2s ease; /* Smooth movement */
-    border-radius: 50%; /* Makes the player a circle */
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.5); /* Adds a shadow for depth */
+    background: transparent;
+    font-size: 20px; 
+    text-align: center;
+    line-height: 1;
+    transition: 0.2s ease;
+    border-radius: 0; 
+}
+
+#player::after {
+    content: "🧝"; /* Christmas emoji */
 }
 
 #controls {
@@ -123,6 +130,17 @@ width: 4px;
     grid-area: down;
 }
 
+#instructions {
+    margin: 10px;
+    padding: 14px;
+    background-color: #333333;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
 #message { /* Styles for messages */
     position: fixed;
     top: 50%;
@@ -166,6 +184,7 @@ try-again:hover {
     padding: 10px 20px;
     border-radius: 10px;
     border: 2px solid #4CAF50;
+    background-color: white;
 }
 
 .exit {
@@ -175,8 +194,8 @@ try-again:hover {
     background-repeat: no-repeat;
     background-color: transparent;
     padding: 8px; /* Creates space around the image */
-    padding-right: 4px;
-    padding-left: 4px;
+    padding-right: 4px; /* Adjusts right padding for better centering */
+    padding-left: 4px; /* Adjusts left padding for better centering */
 }
 
 #maze {
