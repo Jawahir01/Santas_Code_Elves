@@ -34,7 +34,7 @@ body {
 }
 
 .cell.exit {
-    background: #4CAF50; /* Green color for exit cell */
+    background-image: url(../assets/images/christmas-present.png); /* Image for exit cell. Obtained from Pngtree*/
 }
 
 .wall {
@@ -169,7 +169,14 @@ try-again:hover {
 }
 
 .exit {
-    background-image: url(/Santa-s_Code_Elves/assets/images/christmas-present.png);/* Image for exit cell. Obtained from Pngtree*/
+    background-image: url('../Santa-s_Code_Elves/assets/images/christmas-present.png');
+    background-size: contain; /* Scales image to fit while keeping aspect ratio */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding: 8px; /* Creates space around the image */
+    padding-right: 4px;
+    padding-left: 4px;
 }
 
 #maze {
