@@ -32,15 +32,16 @@ The progress bar was added to let the players know how many games they have won 
 
 The progress bar will help the players in knowing how much of the game they have completed. It will also give them an idea on when and who created this game in case they did not press the "Elves" button.
 
-# FIRST LEVEL! 🎄😈🎅🏻
+# Games!🎄😈🎅🏻
 
+**Grinch Hunt Game**
 <img width="794" height="863" alt="image" src="https://github.com/user-attachments/assets/6f177905-667b-4936-872a-8a34ba0d7432" />
 
 In the first level, named the "Grinch Hunt Game", the player will interact with everything inside the yellow box. The player receives clear and understandable instructions, along with a timer and the amount of lives (only 1). The game consists on having to click on The Grinch as fast as possible before the time runs out. Make sure you get rid of him, we don't want him ruining Christmas again! Once The Grinch is defeated, a message and a button will pop up, allowing you safe passage back to the main page. There is also a red cross button, which will take the player back to the main page.
 
 The first level shows the player the usual format for the rest of the games. The location of the instructions may vary. It will also tell the player if they have successfuly completed the level, or failed it miserably somehow.
 
-# SECOND LEVEL! 🃏♠️♦️
+** Memory Match Game ** 
 
 <img width="701" height="859" alt="image" src="https://github.com/user-attachments/assets/0ad5218f-7a41-4738-a138-6ff85b64ef53" />
 
@@ -48,58 +49,54 @@ In the second level, named the "Memory Match Game", the player will have the sam
 
 The second level will help the player with their memorization skills, as well as boost cognitive skills like memory, focus, and problem-solving through pattern-reconition.
 
-# THIRD LEVEL! 🎅🏻
+** Quiz Game ** 
 
 **IMAGE**
+
+The third level is a small questionnaire where the player will answer Christmas related questions. When the player answers 5 of these questions, they will be able to continue onto the next challenge.
+
+This game helps the user by fostering self-reflection, increasing self-awareness, and providing structure for understanding thoughts and feelings. Furthermore, they help provide structure for memories and develop long-term memory.
+
+** Maze Game **
+
+<img width="602" height="600" alt="image" src="https://github.com/user-attachments/assets/3f557d89-69b3-43e0-a92e-36e5df6905eb" />
 
 The third level consists of a maze where the player will have to guide an elf to a present somewhere in the maze. But be careful, each game lost will reset the maze, ehich might make it easier or harder for the player to reach the present. This game has a time limit of 60 seconds. Once the time is over, you will receive a message depending on whether you won or lost.
 
 This level helps the player develop critical cognitive skills like problem-solving, memory, focus, and spatial reasoning, all while teaching planning, persistence, and strategic thinking. 
 
-# FOURTH LEVEL! (emojis)
-
-**IMAGE**
-
-Description
-
-How does it help the player
-
-# Testing Process (emojis)
-
-Text
-
-
 # Bugs Found and Fixed 🐛😊
-
-
-
 
 Maze Game: In the maze game, the generation for the maze would only appear on one clums of cells and would occupy the whole line, from top to bottom. This was fixed by removing an accidental {}, which had to be placed later after the rows.
 
+General: Problems with wording and case-specific characters.
 
-
-#Bugs Found and Not Fixed 🐛😥
-
-
-
-
-Maze Game: In the maze game, the generation for the exit cell has a background image of a present. This image most of the times slightly interpheres with the walls of the grid. It does not affect gameplay, only visual.
+Javascript logic errors and null/undefined obj.
 
 # Credits 
 
 emojipedia.org : Helped obtain emojis for the page and README.md
-crayion : used for image background in maze
+
+crayion : used for finding images
+
 CloudConvert : Converting images to JPG
-Youtube : General videos for maze generation in JS
-Google search : Image for the present in the maze
+
+Youtube : General videos for game creation in  JS
+
+Google search : Images found in games
+
 EMMETT : Helped find bugs and recommended code used in final result
+
+DeepSeek : Helped finding code recomendations
 
 
 # What We Learnt
 
-Enrique: I learnt how to properly organize JS code and how important the {} are to keep in order. One mistake with them can result in huge misunderstandings and weird outcomes.
+We learnt many things, but the most important was organization and communication. Without those two, the project would have been a complete disaster.
+
+Furthermore, it is also important to be able to ask for help when needed. No one should be scared or ashamed because of their poor knowledge. We are here to learn, and that is what we should do, learn.
 
 
 # Final thoughts
 
-Enrique: I really enjoyed the overall experience of this Hackathon. The part I most enjoyed was talking to new people and getting to know their experience. Funny how talking to random strangers can make your day. Taking in consideration this was my first Hackathon, I don't think I could have had a better "veteran"/experienced programmer with us. I learnt a lot and will definitely be participating in another Hackathon in the future!
+We really enjoyed the overall experience of this Hackathon. The most enjoyed part was having the opportunity to converse with nea people and learn about their experiences. Funny how talking to random strangers can make your day. For most of us, this was our first Hackathon, so it was definitely a challenge.

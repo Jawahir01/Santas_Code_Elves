@@ -1,0 +1,241 @@
+#body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    background-image: url(../images/snow-background.jpg);
+    background-size: 120% 120%; /* Adjusted to better fit the screen */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+} 
+
+#maze-container {
+    position: relative; /*allows for absolute positioning of child elements*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(34, 34, 34, 0.5);
+    overflow: hidden; /* Prevents scrollbars from appearing */
+}
+
+.cell { /* Styles for each cell in the maze */
+    position: relative;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.9);
+    transition: 0.3s ease;
+}
+
+.cell.exit {
+    background-image: url(../assets/images/christmas-present.png); /* Image for exit cell. Obtained from Pngtree*/
+}
+
+.wall {
+    background: #000000; /* Black color for walls */
+    position: absolute;
+}
+
+.wall.top { 
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.wall.right {
+    top : 0;
+    right: 0;
+    bottom: 0;
+width: 4px;
+}
+
+.wall.left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.wall.bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+}
+
+#player {
+    position: absolute;
+    background: transparent;
+    font-size: 20px; 
+    text-align: center;
+    line-height: 1;
+    transition: 0.2s ease;
+    border-radius: 0; 
+}
+
+#player::after {
+    content: "🧝"; /* Christmas emoji */
+}
+
+#controls {
+    margin: 10px;
+    display: grid;
+    grid-template-areas: 
+    ". up ."
+    "left . right"
+    ". down .";
+    gap: 10px;
+    justify-content: center;
+}
+
+.control-btn { /* Styles for control buttons */
+    width: 80px;
+    height: 60px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px #388E3C;
+    transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+.control-btn:active { /* Button press effect */
+    transform: scale(0.95);
+}
+
+#up {
+    grid-area: up
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
+}
+
+#down {
+    grid-area: down;
+}
+
+#instructions {
+    margin: 10px;
+    padding: 14px;
+    background-color: #333333;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+#message { /* Styles for messages */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color: #FFD700; /* Gold color for messages */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: black;  
+    padding: 30px 40px;
+    border-radius: 20px;
+    display: none; /* Hidden by default */
+    animation: messageAppear 0.5s forwards;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    border: 2px solid #4CAF50;
+}
+
+#try-again {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px #388E3C;
+    transition: background-color 0.3s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+}
+
+#try-again:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(72, 219, 112, 0.6);
+}
+
+#timer {
+    color:#000000;
+    font-size: 24px;
+    margin: 20px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+    background-color: white;
+}
+
+.exit {
+    background-image: url(../images/christmas-present.png); /* Image for exit cell. Obtained from Pngtree*/
+    background-size: contain; /* Scales image to fit while keeping aspect ratio */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding: 8px; /* Creates space around the image */
+    padding-right: 4px; /* Adjusts right padding for better centering */
+    padding-left: 4px; /* Adjusts left padding for better centering */
+}
+
+#maze {
+    display: grid;
+    background-color: white;
+}
+
+.hover-effect {
+    background: linear-gradient(45deg, #4CAF50, #45a049) !important;
+    transform: scale(1.15) !important;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8) !important;
+}
+
+@media (max-width: 768px) {
+    .control-btn {
+        width: 70px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+        justify-content: flex-start;
+    }
+    #maze-container {
+        max-width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+    .control-btn {
+        width: 65px;
+        height: 50px;
+        font-size: 14px;
+    }
+    #timer {
+        font-size: 18px;
+        padding: 6px 12px;
+        margin: 5px;
+    }
+}
