@@ -427,7 +427,7 @@ function openMiniGame(houseNumber) {
             game2Container.style.display = 'flex';
             break;
         case 3:
-            initMazeGame();
+            initCodePuzzleGame();
             game3Container.style.display = 'flex';
             break;
         case 4:
