@@ -1,0 +1,30 @@
+/* Game 3 – Christmas Questions */
+
+.game3-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game3-container h2 {
+  color: #b11226;
+}
+
+.game3-container button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2e7d32;
+  color: white;
+  cursor: pointer;
+}
+
+.game3-container button:hover {
+  background: #1b5e20;
+}
