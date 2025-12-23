@@ -7,6 +7,32 @@ let maze;
 let exitPos;
 let gameActive = false;
 
+function initMazeGame() {
+    game3Container.innerHTML = `<!DOCTYPE html>
+
+<div id="body">
+    <div id="timer"> Time: 60</div>
+    <div id="maze-container">
+            <div id="maze"></div>
+            <div id="player"></div>
+    </div>
+
+    <div id="instructions">
+        Instructions: Use the buttons below or the arrow keys to navigate the maze and reach the present!
+    </div>
+
+    <div id="controls">
+        <button class="control-btn" id="up" onclick="movePlayer('up')">Up</button>
+        <button class="control-btn" id="left" onclick="movePlayer('left')">Left</button>
+        <button class="control-btn" id="right" onclick="movePlayer('right')">Right</button>
+        <button class="control-btn" id="down" onclick="movePlayer('down')">Down</button>
+    </div>
+    <div id="message">
+        <h2 id="message-text"></h2>
+        <button id="try-again" onclick="initMazeGame ()">Try Again</button>
+    </div>
+</div>
+`;
 function generateMaze() { //Maze generation logic
     maze = Array(MAZE_SIZE)
     .fill()
@@ -241,4 +267,4 @@ document.addEventListener("keyUp", (e) => { //Remove hover effect on key release
 }
 })
 
-initMazeGame();//Start the game on load
+}

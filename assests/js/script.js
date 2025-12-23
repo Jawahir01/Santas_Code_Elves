@@ -255,7 +255,7 @@ function updateProgress() {
 
 // Play sounds
 function playSound(type) {
-    switch(type) {
+    switch (type) {
         case 'start':
             showSantaMessage("Let's help Santa!");
             break;
@@ -401,13 +401,13 @@ function openMiniGame(houseNumber) {
     mainGame.style.display = 'none';
     
     // Show the appropriate mini-game
-    switch(houseNumber) {
+    switch (houseNumber) {
         case 1:
             initGrinchHuntGame();
             game1Container.style.display = 'flex';
             break;
         case 2:
-            initMazeGame();
+            initMemoryGame();
             game2Container.style.display = 'flex';
             break;
         case 3:
