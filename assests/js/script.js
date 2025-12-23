@@ -310,28 +310,44 @@ function showElvesInfo() {
         modal.innerHTML = `
             <div class="elves-modal-content">
                 <button class="close-modal">&times;</button>
-                <h2><i class="fas fa-hat-wizard"></i> The Code Elves</h2>
+                <h2>The Code Elves</h2>
                 <p>Meet the team of magical elves who help Santa with coding challenges!</p>
                 <p>These skilled programmers work behind the scenes to make sure Santa's delivery system runs smoothly.</p>
-                <div class="elves-list">
-                    <div class="elf">
-                        <i class="fas fa-code"></i>
-                        <p>Algo Elf</p>
+                <div class="elves-list" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:12px;">
+                    <div class="elf" style="width:140px;text-align:center;">
+                        <img src="assests/images/colm.png" alt="Algo Elf" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:8px;" onerror="this.onerror=null;this.src='https://via.placeholder.com/80'" />
+                        <p style="margin:6px 0 8px;font-weight:bold;">Colm Woods<br>Algo Elf</p>
+                        <div style="display:flex;gap:8px;justify-content:center;">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="Algo Elf GitHub" style="color:white;font-size:1.2rem;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Algo Elf LinkedIn" style="color:white;font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
-                    <div class="elf">
-                        <i class="fas fa-paint-brush"></i>
-                        <p>CSS Elf</p>
+                    <div class="elf" style="width:140px;text-align:center;">
+                        <img src="assests/images/elf-css.png" alt="CSS Elf" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:8px;" onerror="this.onerror=null;this.src='https://via.placeholder.com/80'" />
+                        <p style="margin:6px 0 8px;font-weight:bold;">Emilia <br>CSS Elf</p>
+                        <div style="display:flex;gap:8px;justify-content:center;">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="CSS Elf GitHub" style="color:white;font-size:1.2rem;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="CSS Elf LinkedIn" style="color:white;font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
-                    <div class="elf">
-                        <i class="fas fa-cogs"></i>
-                        <p>Logic Elf</p>
+                    <div class="elf" style="width:140px;text-align:center;">
+                        <img src="assests/images/elf-logic.png" alt="Logic Elf" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:8px;" onerror="this.onerror=null;this.src='https://via.placeholder.com/80'" />
+                        <p style="margin:6px 0 8px;font-weight:bold;">Enriqui <br>Logic Elf</p>
+                        <div style="display:flex;gap:8px;justify-content:center;">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="Logic Elf GitHub" style="color:white;font-size:1.2rem;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Logic Elf LinkedIn" style="color:white;font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
-                    <div class="elf">
-                        <i class="fas fa-bug"></i>
-                        <p>Debug Elf</p>
+                    <div class="elf" style="width:140px;text-align:center;">
+                        <img src="assests/images/elf-debug.png" alt="Debug Elf" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:8px;" onerror="this.onerror=null;this.src='https://via.placeholder.com/80'" />
+                        <p style="margin:6px 0 8px;font-weight:bold;">Jawahir <br>Debug Elf</p>
+                        <div style="display:flex;gap:8px;justify-content:center;">
+                            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="Debug Elf GitHub" style="color:white;font-size:1.2rem;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Debug Elf LinkedIn" style="color:white;font-size:1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
-                <p>Together, they ensure that every line of code is festive and bug-free for Christmas delivery!</p>
+                <p style="margin-top:14px;">Together, they ensure that every line of code is festive and bug-free for Christmas delivery!</p>
             </div>
         `;
         document.body.appendChild(modal);
